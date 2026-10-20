@@ -13,6 +13,8 @@ repos:
       - id: check-added-large-files
         args: ["--maxkb=500"]
       - id: check-case-conflict
+      # the root server may clone the site on Windows:
+      - id: check-illegal-windows-names
       - id: check-merge-conflict
       - id: check-xml
       - id: end-of-file-fixer
@@ -34,6 +36,8 @@ repos:
         # args: [--auto-fix-network, "yes"]
       - id: bes-conventions-check
       - id: bes-relevance-lint
+      # GroupRelevance makes a repository site sync fail:
+      - id: bes-relevance-convert-group
 
   # https://github.com/jgstew/pre-commit-jgstew
   - repo: https://github.com/jgstew/pre-commit-jgstew
