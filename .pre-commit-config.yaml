@@ -68,7 +68,7 @@ repos:
       - id: bes-relevance-convert-group
       # layout, numeric-ID file names and path length for a repository site:
       - id: bes-siterepo-validate-layout
-  
+
   # Manual stage: check-hooks-apply fails for hooks with nothing to check yet
   # (no .bes files here so far).
   - repo: meta
