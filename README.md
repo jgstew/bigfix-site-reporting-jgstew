@@ -10,7 +10,7 @@ from this Git repository.
 | Path | What it is |
 |---|---|
 | `ServerFiles/relevance-debugger-console.ojo` | The Relevance Debugger console dashboard: evaluates client relevance on the console's computer (qna) and with FastQuery, and session relevance. |
-| `ServerFiles/relevance-debugger-webreport.besrpt` | The Relevance Debugger for Web Reports: analyzes relevance as you type and evaluates session relevance. Web Reports picks it up from the site automatically. |
+| `ServerFiles/relevance-debugger-webreport.beswrpt` | The Relevance Debugger for Web Reports: analyzes relevance as you type and evaluates session relevance. Web Reports picks it up from the site automatically. |
 | `Fixlets/` | Fixlets, Tasks and Analyses (`.bes`), if any are added. |
 | `ClientFiles/` | Files gathered by clients. |
 | `site.xml` | Site relevance: the site's content does not apply to proxy agents. |

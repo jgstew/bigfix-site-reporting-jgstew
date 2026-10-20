@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BESWebReport>
+	<Name>Relevance Debugger</Name>
+	<Description></Description>
+	<Type>CustomReport</Type>
+	<Source>JGStew</Source>
+	<Data><![CDATA[
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta charset="utf-8" />
 <style>
@@ -2037,3 +2044,5 @@ if (problem) {
   else window.addEventListener("load", go, { once: true });
 }
 </script>
+	]]></Data>
+</BESWebReport>
