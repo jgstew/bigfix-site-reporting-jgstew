@@ -1,0 +1,70 @@
+---
+# run on only items staged in git:  pre-commit
+# automatically run on commit:      pre-commit install
+# check all files in repo:          pre-commit run --all-files
+# check all files manual stage:     pre-commit run --all-files --hook-stage manual
+# update all checks to latest:      pre-commit autoupdate --freeze
+# https://github.com/pre-commit/pre-commit-hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    hooks:
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-xml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        # two trailing spaces are a Markdown line break:
+        args: [--markdown-linebreak-ext=md]
+      - id: detect-private-key
+
+  # https://github.com/jgstew/pre-commit-bigfix
+  # bes-schema-validate also covers the site's own site.xml, siteConfig.xml,
+  # Fixlets/digest.xml and Signatures/*.xml (since v1.12.0), and .ojo dashboards.
+  - repo: https://github.com/jgstew/pre-commit-bigfix
+    rev: 1029eb017f43deaf97686952f429ad4eacb1853e  # frozen: v1.12.0
+    hooks:
+      - id: bes-schema-validate
+      - id: bes-actionscript-lint-schclass
+      - id: bes-actionscript-validate-script
+      - id: bes-actionscript-validate-prefetch
+        # args: [--auto-fix-network, "yes"]
+      - id: bes-conventions-check
+      - id: bes-relevance-lint
+
+  # https://github.com/jgstew/pre-commit-jgstew
+  - repo: https://github.com/jgstew/pre-commit-jgstew
+    rev: a04f4ccc5f9af2d1cda1dd5c519bb3888439648b  # frozen: v2.3.0
+    hooks:
+      # Console and Web Reports content is safest as ASCII; this fixes it in
+      # place and fails so the change is reviewed and re-staged.
+      - id: fix-files-to-ascii
+        # Markdown keeps its typography (the README's folder tree, dashes):
+        exclude: \.md$
+
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: cba56bcde1fdd01c1deb3f945e69764c291a6530  # frozen: v1.38.0
+    hooks:
+      - id: yamllint
+        args: [-c=.yamllint.yaml]
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: 57b21406f092110c18776e39b0bda50d37c945c8  # frozen: v2.4.3
+    hooks:
+      - id: codespell
+        # `ths` is the session relevance inspector for html <th> elements:
+        args: ["-L", "ths"]
+        # exported BES content is full of product names and relevance keywords:
+        exclude: \.(bes|ojo)$
+
+  # Manual stage: check-hooks-apply fails for hooks with nothing to check yet
+  # (no .bes files here so far).
+  - repo: meta
+    hooks:
+      - id: check-useless-excludes
+        stages: [manual]
+      - id: check-hooks-apply
+        stages: [manual]
