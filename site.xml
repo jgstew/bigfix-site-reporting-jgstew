@@ -5,9 +5,5 @@
  This aids efficiency because, if false, none of the individual fixlets will be evaluated
 -->
 <Site>
-  <Relevance>
-    <![CDATA[
-      (if exists property "in proxy agent context" then not in proxy agent context else True)
-    ]]>
-  </Relevance>
+  <Relevance><![CDATA[(if exists property "in proxy agent context" then not in proxy agent context else True)]]></Relevance>
 </Site>
