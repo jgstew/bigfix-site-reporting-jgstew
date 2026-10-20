@@ -15,29 +15,16 @@ repos:
       - id: check-case-conflict
       # the root server may clone the site on Windows:
       - id: check-illegal-windows-names
+      # check-merge-conflict ensures no unresolved merge conflicts exist in files.
       - id: check-merge-conflict
+      # check-xml ensures XML files are well-formed.
       - id: check-xml
+      # end-of-file-fixer ensures files end with a newline.
       - id: end-of-file-fixer
       - id: trailing-whitespace
         # two trailing spaces are a Markdown line break:
         args: [--markdown-linebreak-ext=md]
       - id: detect-private-key
-
-  # https://github.com/jgstew/pre-commit-bigfix
-  # bes-schema-validate also covers the site's own site.xml, siteConfig.xml,
-  # Fixlets/digest.xml and Signatures/*.xml (since v1.12.0), and .ojo dashboards.
-  - repo: https://github.com/jgstew/pre-commit-bigfix
-    rev: 1029eb017f43deaf97686952f429ad4eacb1853e  # frozen: v1.12.0
-    hooks:
-      - id: bes-schema-validate
-      - id: bes-actionscript-lint-schclass
-      - id: bes-actionscript-validate-script
-      - id: bes-actionscript-validate-prefetch
-        # args: [--auto-fix-network, "yes"]
-      - id: bes-conventions-check
-      - id: bes-relevance-lint
-      # GroupRelevance makes a repository site sync fail:
-      - id: bes-relevance-convert-group
 
   # https://github.com/jgstew/pre-commit-jgstew
   - repo: https://github.com/jgstew/pre-commit-jgstew
@@ -64,6 +51,24 @@ repos:
         # exported BES content is full of product names and relevance keywords:
         exclude: \.(bes|ojo)$
 
+  # https://github.com/jgstew/pre-commit-bigfix
+  # bes-schema-validate also covers the site's own site.xml, siteConfig.xml,
+  # Fixlets/digest.xml and Signatures/*.xml (since v1.12.0), and .ojo dashboards.
+  - repo: https://github.com/jgstew/pre-commit-bigfix
+    rev: e2be9a8e47a2e9862c1f34a63b9a9467d6e79516  # frozen: v1.13.0
+    hooks:
+      - id: bes-schema-validate
+      - id: bes-actionscript-lint-schclass
+      - id: bes-actionscript-validate-script
+      - id: bes-actionscript-validate-prefetch
+        # args: [--auto-fix-network, "yes"]
+      - id: bes-conventions-check
+      - id: bes-relevance-lint
+      # GroupRelevance makes a repository site sync fail:
+      - id: bes-relevance-convert-group
+      # layout, numeric-ID file names and path length for a repository site:
+      - id: bes-siterepo-validate-layout
+  
   # Manual stage: check-hooks-apply fails for hooks with nothing to check yet
   # (no .bes files here so far).
   - repo: meta
